@@ -1,0 +1,5 @@
+**/*/.vs
+**/*/obj
+**/*/library
+**/*/*.csproj
+FeatureUnity/.vs/FeatureUnity/xs/project-cache/Unity.RenderPipelines.Universal.Runtime-Debug.json
