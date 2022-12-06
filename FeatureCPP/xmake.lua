@@ -9,6 +9,7 @@ target("FeatureCPP")
     add_cxxflags("-std=c++2a")
     add_files("src/*.cpp")
     add_files("src/**/*.cpp")
+    add_files("module/**/*.ixx")
     add_includedirs("include")
     add_packages("vulkansdk")
     
