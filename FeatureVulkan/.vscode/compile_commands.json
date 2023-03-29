@@ -1,6 +1,6 @@
 [
 {
-  "directory": "/Users/muyuli/Workspace/FeatureVulkan",
-  "arguments": ["/usr/bin/clang", "-c", "-Qunused-arguments", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-O3", "-std=c++20", "-fmodules", "-std=c++2a", "-fbuiltin-module-map", "-fimplicit-modules", "-DNDEBUG", "-o", "build/.objs/FeatureVulkan/macosx/arm64/release/src/main.cpp.o", "src/main.cpp"],
+  "directory": "/Users/muyuli/Workspace/FeatureLearn/FeatureVulkan",
+  "arguments": ["/usr/bin/clang", "-c", "-Qunused-arguments", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-O3", "-std=c++20", "-Isrc/**/*", "-fmodules-ts", "-std=c++2a", "-fmodules", "-fbuiltin-module-map", "-fimplicit-modules", "-DNDEBUG", "-o", "build/.objs/FeatureVulkan/macosx/arm64/release/src/main.cpp.o", "src/main.cpp"],
   "file": "src/main.cpp"
 }]

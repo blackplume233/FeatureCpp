@@ -1,6 +1,5 @@
-#include "iostream"
+import Nalog;
 int main(int argc, char **argv) {
-  std::cout << "hello world!" << std::endl;
-
+  Log::Debug();
   return 0;
 }

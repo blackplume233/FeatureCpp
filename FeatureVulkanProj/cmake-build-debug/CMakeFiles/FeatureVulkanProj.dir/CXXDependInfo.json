@@ -1,0 +1,15 @@
+{
+	"bmi-installation" : null,
+	"compiler-id" : "AppleClang",
+	"config" : "Debug",
+	"cxx-modules" : {},
+	"dir-cur-bld" : "/Users/muyuli/Workspace/FeatureLearn/FeatureVulkanProj/cmake-build-debug",
+	"dir-cur-src" : "/Users/muyuli/Workspace/FeatureLearn/FeatureVulkanProj",
+	"dir-top-bld" : "/Users/muyuli/Workspace/FeatureLearn/FeatureVulkanProj/cmake-build-debug",
+	"dir-top-src" : "/Users/muyuli/Workspace/FeatureLearn/FeatureVulkanProj",
+	"exports" : [],
+	"include-dirs" : [],
+	"language" : "CXX",
+	"linked-target-dirs" : [],
+	"module-dir" : "/Users/muyuli/Workspace/FeatureLearn/FeatureVulkanProj/cmake-build-debug/CMakeFiles/FeatureVulkanProj.dir"
+}

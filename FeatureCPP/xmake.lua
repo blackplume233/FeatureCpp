@@ -5,13 +5,14 @@ local is_win = is_plat("windows")
 target("FeatureCPP")
     set_kind("binary")
     set_languages("cxx20")
+    add_cxxflags("-std=c++20")
     add_cxxflags("-fmodules-ts")
-    add_cxxflags("-std=c++2a")
     add_files("src/*.cpp")
     add_files("src/**/*.cpp")
+    add_files("module/*.ixx")
     add_files("module/**/*.ixx")
     add_includedirs("include")
-    add_packages("vulkansdk")
+    set_toolset("cxx", "clang")
     
 
 --

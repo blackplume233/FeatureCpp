@@ -4,11 +4,12 @@ add_rules("mode.debug", "mode.release")
 
 target("FeatureVulkan")
     set_languages("cxx20")
-    add_cxxflags("-fmodules")
+    add_cxxflags("-fmodules-ts")
     add_cxxflags("-std=c++2a")
     set_kind("binary")
     add_files("src/*.cpp")
     add_files("src/**/*.ixx")
+    add_includedirs("src/**/*")
     add_packages("vulkansdk")
 target_end()
 

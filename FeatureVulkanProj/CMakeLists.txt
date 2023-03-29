@@ -1,0 +1,20 @@
+cmake_minimum_required(VERSION 3.25)
+project(FeatureVulkanProj)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_FLAGS -std=c++20)
+set(CMAKE_CXX_FLAGS -fmodules-ts)
+set(CMAKE_EXPERIMENTAL_CXX_MODULE_DYNDEP 1)
+# turn on the experimental API
+set(CMAKE_EXPERIMENTAL_CXX_MODULE_CMAKE_API  "3c375311-a3c9-4396-a187-3227ef642046")
+set(CMAKE_CXX_EXTENSIONS OFF)
+#set(CMAKE_CXX_COMPILER clang)
+
+AUX_SOURCE_DIRECTORY(module MODULE_SOURCES_DIR)
+set(CMAKE_EXPERIMENTAL_CXX_MODULE_DYNDEP ${MODULE_SOURCES_DIR})
+add_executable(FeatureVulkanProj ${MODULE_SOURCES_DIR} main.cpp )
+#target_sources(FeatureVulkanProj MODULE_SOURCES_DIR)
+
+IF (APPLE)
+    #SET(CMAKE_CXX_COMPILER clang)
+ENDIF ()

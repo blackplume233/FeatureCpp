@@ -1,0 +1,8 @@
+# ninja log v5
+375	415	1680008041890632908	FeatureVulkanProj	2da6299eccd83359
+1	45	1680008355249544789	build.ninja	7dcad5bc2c4ac2d8
+5	374	1680008041847816170	CMakeFiles/FeatureVulkanProj.dir/main.cpp.o	f312b7762057ad20
+0	45	1680008355249544789	build.ninja	7dcad5bc2c4ac2d8
+4	357	1680008355613103520	CMakeFiles/FeatureVulkanProj.dir/main.cpp.o	16cd003c539acf75
+4	537	1680008377091891829	CMakeFiles/FeatureVulkanProj.dir/module/na_log.cppm.o	23e7aaeed164ab79
+537	575	1680008377130248218	FeatureVulkanProj	8d5bece8a528bceb
