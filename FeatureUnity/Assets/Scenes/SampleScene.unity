@@ -239,7 +239,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1020162825}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.54, y: -1.33, z: 0}
+  m_LocalPosition: {x: 39.29, y: 19.28, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -276,11 +276,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 1020162825}
-  Angle: 48
-  Speed: 8.59
+  Config:
+    SpeedZone: {x: 10, y: 30}
+    AngleZone: {x: -25, y: 60}
+    Gravity: -9.8
+    AngleCalStep: 1
+  AutoFindSpeed: 1
+  Angle: 47.5
+  Speed: 26.501083
   DebugSimTimeLength: 10
   DebugSimSpilt: 10000
-  finalDistance: 0.15371132
+  finalDistance: 0.0000038146973
 --- !u!4 &1082029840
 Transform:
   m_ObjectHideFlags: 0

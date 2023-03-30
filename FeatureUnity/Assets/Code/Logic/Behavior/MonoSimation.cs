@@ -1,35 +1,39 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Code.Logic.Tools;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [ExecuteInEditMode]
 public class MonoSimation : MonoBehaviour
 {
     public GameObject Target;
+    public ParabolaFunctor Config;
     
+    public bool AutoFindSpeed = true;
     public float Angle;
     public float Speed;
-    
-    
-
     public const float ConstanstG = -10f;
+    public float DebugSimTimeLength = 10;
+    public int DebugSimSpilt = 10000;
+    public float finalDistance = 0.0f;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 
-    public float DebugSimTimeLength = 10;
-    public int DebugSimSpilt = 10000;
-    public float finalDistance = 0.0f;
+    
     private void OnDrawGizmos()
     {
         const float lineLength = 50;
@@ -41,10 +45,10 @@ public class MonoSimation : MonoBehaviour
         Vector3 initVelocity = dir.normalized * Speed;
         Vector3 position = transform.position;
         float step = DebugSimTimeLength / DebugSimSpilt;
-        
+
         for (int i = 0; i < DebugSimSpilt; i++)
         {
-            var offset  = (initVelocity + Vector3.up * i * ConstanstG * step) * step;
+            var offset = (initVelocity + Vector3.up * i * ConstanstG * step) * step;
             Gizmos.DrawLine(position, position + offset);
             position += offset;
         }
@@ -58,21 +62,33 @@ public class MonoSimation : MonoBehaviour
         }
 
         var offsetHight = Target != null ? Target.transform.position.y - transform.position.y : 0.0f;
-        var t = CalTimeByHigh(initVelocity.y, offsetHight, true);
+        var t = Config.CalTimeByHigh(initVelocity.y, offsetHight, true);
         Vector3 finalPos = transform.position;
         if (t > 0)
         {
             finalPos += new Vector3(initVelocity.x, 0, initVelocity.z) * t + Vector3.up * offsetHight;
         }
-        
+
         finalDistance = Vector3.Distance(finalPos, Target.transform.position);
-        
+
         Gizmos.color = Color.blue;
         Gizmos.DrawLine(finalPos + Vector3.up * lineLength, finalPos - Vector3.up * lineLength);
         Gizmos.DrawLine(finalPos + panelDir * lineLength, finalPos - panelDir * lineLength);
         Gizmos.DrawCube(finalPos, Vector3.one);
-        
-        
+
+        if (AutoFindSpeed && Target != null)
+        {
+            var targetPos = Target.transform.position;
+            var selfPos = transform.position;
+            var offsetH = targetPos.y - selfPos.y;
+
+            var disVec = (targetPos - selfPos);
+            disVec.y = 0;
+            var offsetPanel = disVec.magnitude;
+            var ret = Config.FindExceptAngle(offsetPanel, offsetH);
+            Speed = ret.speed;
+            Angle = ret.angle;
+        }
     }
 
     private void OnGUI()
@@ -85,35 +101,11 @@ public class MonoSimation : MonoBehaviour
             var dis = Vector3.Distance(new Vector3(targetPos.x, 0, targetPos.z), new Vector3(pos.x, 0, pos.z));
             GUILayout.TextField($"TargetDistance:{dis}");
         }
-        
     }
 
-    private float CalTimeByHigh(float velocity, float highOffset, bool useLatePoint, float acceleration = ConstanstG)
-    {
-        var baseParam = highOffset * 2 * acceleration + velocity * velocity;
-        if (baseParam < 0)
-        {
-            return -1;
-        }
-        var baset = Mathf.Sqrt(baseParam);
-        if(useLatePoint)
-            baset = -baset;
-        var t = (baset - velocity) / acceleration;
-        return t;
-    }
 
-    public float CalBestSpeed(float angle, float panelOffset, float highOffset, float acceleration = ConstanstG)
-    {
-        float sin = Mathf.Sin(Mathf.Deg2Rad * angle);
-        float cos = Mathf.Cos(Mathf.Deg2Rad * angle);
-        float a = acceleration;
-        float param = highOffset - (panelOffset * sin / cos);
-        param = param * 2.0f / a;
-        if(param < 0)
-            return -1;
-        var sqrParam = Mathf.Sqrt(param);
-        var v1 = panelOffset/( sqrParam * cos);
-        //var v2 = panelOffset/( -sqrParam * cos);
-        return v1;
-    }
+    #region Utils
+
+   
+    #endregion
 }
