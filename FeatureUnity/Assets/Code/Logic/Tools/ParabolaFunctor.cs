@@ -4,17 +4,18 @@ using UnityEngine.Serialization;
 
 namespace Code.Logic.Tools
 {
-     [Serializable]
+    [Serializable]
     public class ParabolaFunctor
     {
         public const float ConstanstG = -9.8f;
-        
+
         public Vector2 SpeedZone;
         public Vector2 AngleZone;
-        public float   Gravity = ConstanstG;
-        public int     AngleCalStep = 1;
+        public float Gravity = ConstanstG;
+        public int AngleCalStep = 1;
         public float MinSpeed => SpeedZone.x;
         public float MaxSpeed => SpeedZone.y;
+
         public struct ConfigProxy
         {
             public float angle { get; private set; }
@@ -25,11 +26,12 @@ namespace Code.Logic.Tools
                 sin = Mathf.Sin(Mathf.Deg2Rad * angle);
                 cos = Mathf.Cos(Mathf.Deg2Rad * angle);
             }
-            
+
 
             public float sin { get; private set; }
             public float cos { get; private set; }
         }
+
         public struct CalResult
         {
             public float time;
@@ -37,6 +39,7 @@ namespace Code.Logic.Tools
             public float angle;
             public float distance;
         }
+
         public float CalTimeByHigh(float verSpeed, float highOffset, bool useLatePoint, float gravity = ConstanstG)
         {
             var baseParam = highOffset * 2 * gravity + verSpeed * verSpeed;
@@ -67,7 +70,6 @@ namespace Code.Logic.Tools
         }
 
 
-
         public bool IsBetterRet(ref CalResult ret, ref CalResult bestRet)
         {
             if (Mathf.Abs(ret.distance) < Mathf.Abs(bestRet.distance))
@@ -83,7 +85,7 @@ namespace Code.Logic.Tools
         {
             var centerAngle = (AngleZone.x + AngleZone.y) / 2;
             CalResult bestResult = new CalResult { angle = centerAngle, distance = float.MaxValue, speed = SpeedZone.x, time = -1 };
-            
+
             int stepCount = (int)((AngleZone.y - centerAngle) / AngleCalStep);
 
             for (int i = 0; i <= stepCount; i++)
@@ -98,7 +100,7 @@ namespace Code.Logic.Tools
 
             for (int i = 0; i <= stepCount; i++)
             {
-                var proxy = new ConfigProxy( centerAngle + i * AngleCalStep);
+                var proxy = new ConfigProxy(centerAngle + i * AngleCalStep);
                 var result = CalExceptSpeedForAngle(proxy, panelOffset, highOffset);
                 if (IsBetterRet(ref result, ref bestResult))
                 {
@@ -183,5 +185,4 @@ namespace Code.Logic.Tools
             return proxy.cos * speed * time;
         }
     }
-
 }

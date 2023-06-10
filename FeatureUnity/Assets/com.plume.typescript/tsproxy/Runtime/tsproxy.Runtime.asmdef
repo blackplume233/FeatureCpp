@@ -1,0 +1,16 @@
+{
+  "name": "tsproxy.Runtime",
+  "references": [
+    "GUID:bcce1ec465fe0c74b95915ad5b03ac70",
+    "GUID:61a10529a7178d441977a5e2f758dbfe"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

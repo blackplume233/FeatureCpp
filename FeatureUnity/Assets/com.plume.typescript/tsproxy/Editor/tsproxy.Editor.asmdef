@@ -1,0 +1,20 @@
+{
+    "name": "tsproxyeditor",
+    "references": [
+        "GUID:c290a9e0c1484dfd8c6a8b28d0965d45",
+        "GUID:bcce1ec465fe0c74b95915ad5b03ac70",
+        "GUID:61a10529a7178d441977a5e2f758dbfe",
+        "GUID:c3b659e7ea1be4c759dbe1d9ab2a3abe"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

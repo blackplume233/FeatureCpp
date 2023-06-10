@@ -8,12 +8,13 @@ namespace Code.Logic.Behavior
 {
     public class ExpressionBehavior : MonoBehaviour
     {
-        [FormerlySerializedAs("ConditionExpression")] public ConditionExpression conditionExpression = new ConditionExpression();
+        [FormerlySerializedAs("ConditionExpression")]
+        public ConditionExpression conditionExpression = new ConditionExpression();
+
         public string ConditionExpressionStr = "1+2";
-       
-        private void OnGUI()    
+
+        private void OnGUI()
         {
-            
         }
     }
 }

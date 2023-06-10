@@ -10,49 +10,35 @@ project(FeatureCPP LANGUAGES CXX C)
 # target
 add_executable(FeatureCPP "")
 set_target_properties(FeatureCPP PROPERTIES OUTPUT_NAME "FeatureCPP")
-set_target_properties(FeatureCPP PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/build/macosx/arm64/release")
-add_custom_command(OUTPUT output_FeatureCPP_FA318422
-    COMMAND echo [  0%]: generating.cxx.module.bmi Nalog
-    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_SOURCE_DIR}/build/.objs/FeatureCPP/macosx/arm64/release/module
-    COMMAND ${CMAKE_SOURCE_DIR}/clang -Qunused-arguments -target arm64-apple-macos13.1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -Iinclude -std=c++20 -fmodules-ts -fmodules -fbuiltin-module-map -fimplicit-modules -fmodules-cache-path=${CMAKE_SOURCE_DIR}/build/.gens/FeatureCPP/macosx/arm64/release/rules/modules/cache -c -x c++-module --precompile ${CMAKE_SOURCE_DIR}/module/NaLog.ixx -o ${CMAKE_SOURCE_DIR}/build/.gens/FeatureCPP/macosx/arm64/release/rules/modules/cache/Nalog.pcm
-    COMMAND ${CMAKE_SOURCE_DIR}/clang -Qunused-arguments -target arm64-apple-macos13.1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -Iinclude -std=c++20 -fmodules-ts -fmodules -fbuiltin-module-map -fimplicit-modules -fmodules-cache-path=${CMAKE_SOURCE_DIR}/build/.gens/FeatureCPP/macosx/arm64/release/rules/modules/cache ${CMAKE_SOURCE_DIR}/build/.gens/FeatureCPP/macosx/arm64/release/rules/modules/cache/Nalog.pcm -c -o ${CMAKE_SOURCE_DIR}/build/.objs/FeatureCPP/macosx/arm64/release/module/NaLog.ixx.o
-    VERBATIM
-)
-add_custom_target(target_FeatureCPP_FA318422
-    DEPENDS output_FeatureCPP_FA318422
-)
-add_dependencies(FeatureCPP target_FeatureCPP_FA318422)
 target_include_directories(FeatureCPP PRIVATE
-    include
+    3rd/imgui
+    3rd/imgui/backends
+    C:/VulkanSDK/1.3.243.0/include
+    C:/VulkanSDK/1.3.243.0/Include/SDL2
 )
 target_compile_options(FeatureCPP PRIVATE
-    $<$<COMPILE_LANGUAGE:C>:-target>
-    $<$<COMPILE_LANGUAGE:CXX>:-target>
-    $<$<COMPILE_LANGUAGE:CXX>:-std=c++20>
-    $<$<COMPILE_LANGUAGE:CXX>:-fmodules-ts>
-    $<$<COMPILE_LANGUAGE:CXX>:-fmodules>
-    $<$<COMPILE_LANGUAGE:CXX>:-fbuiltin-module-map>
-    $<$<COMPILE_LANGUAGE:CXX>:-fimplicit-modules>
+    $<$<COMPILE_LANGUAGE:CXX>:/c>
 )
-set_source_files_properties(${CMAKE_SOURCE_DIR}/src/main.cpp PROPERTIES COMPILE_OPTIONS
-    "$<$<COMPILE_LANGUAGE:CXX>:-fmodule-file=${CMAKE_SOURCE_DIR}/build/.gens/FeatureCPP/macosx/arm64/release/rules/modules/cache/Nalog.pcm>"
-)
-set_target_properties(FeatureCPP PROPERTIES CXX_EXTENSIONS OFF)
 target_compile_features(FeatureCPP PRIVATE cxx_std_20)
-if(MSVC)
-    set_property(TARGET FeatureCPP PROPERTY
-        MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
-endif()
-target_link_libraries(FeatureCPP PRIVATE
-    z
+target_link_directories(FeatureCPP PRIVATE
+    C:/VulkanSDK/1.3.243.0/Lib
 )
-target_link_libraries(FeatureCPP PRIVATE
-    ${CMAKE_SOURCE_DIR}/build/.objs/FeatureCPP/macosx/arm64/release/module/NaLog.ixx.o
+
+target_link_libraries(FeatureCPP PUBLIC
+    vulkan-1.lib
+    SDL2.lib
+    SDL2main.lib
 )
-target_link_options(FeatureCPP PRIVATE
-    -stdlib=libc++
-)
+
 target_sources(FeatureCPP PRIVATE
     src/main.cpp
+    src/RenderWindows.cpp
+    3rd/imgui/backends/imgui_impl_sdl2.cpp
+    3rd/imgui/backends/imgui_impl_vulkan.cpp
+    3rd/imgui/imgui.cpp
+    3rd/imgui/imgui_demo.cpp
+    3rd/imgui/imgui_draw.cpp
+    3rd/imgui/imgui_tables.cpp
+    3rd/imgui/imgui_widgets.cpp
 )
 

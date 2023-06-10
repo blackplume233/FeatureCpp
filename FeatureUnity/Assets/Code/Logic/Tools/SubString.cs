@@ -4,22 +4,22 @@ namespace Code.Logic.Tools
 {
     public struct SubString
     {
-        public string Str{ get; private set; }
-        public int StartIndex{ get; private set; }
+        public string Str { get; private set; }
+        public int StartIndex { get; private set; }
         public int Length { get; private set; }
-        
+
         private string _finalStr;
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         public string DebugStr => Str.Substring(StartIndex, Length);
-        #endif
-        public SubString(string str,int startIndex, int length)
+#endif
+        public SubString(string str, int startIndex, int length)
         {
             StartIndex = startIndex;
             Length = length;
             Str = str;
             _finalStr = null;
         }
-        
+
         public char this[int index]
         {
             get
@@ -28,6 +28,7 @@ namespace Code.Logic.Tools
                 {
                     throw new IndexOutOfRangeException();
                 }
+
                 return Str[StartIndex + index];
             }
         }
@@ -38,27 +39,32 @@ namespace Code.Logic.Tools
             {
                 return ' ';
             }
+
             return Str[StartIndex + index];
         }
+
         public SubString Sub(int startIndex, int length)
         {
             if (startIndex < 0 || startIndex >= Length)
             {
                 throw new IndexOutOfRangeException();
             }
+
             if (startIndex + length > Length)
             {
                 throw new IndexOutOfRangeException();
             }
+
             return new SubString(Str, StartIndex + startIndex, length);
         }
-        
+
         public bool Equals(SubString other)
         {
             if (Length != other.Length)
             {
                 return false;
             }
+
             for (int i = 0; i < Length; i++)
             {
                 if (this[i] != other[i])
@@ -66,14 +72,17 @@ namespace Code.Logic.Tools
                     return false;
                 }
             }
+
             return true;
         }
+
         public override string ToString()
         {
             if (_finalStr != null)
             {
                 return _finalStr;
             }
+
             _finalStr = Str.Substring(StartIndex, Length);
             return _finalStr;
         }

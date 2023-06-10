@@ -1,0 +1,16 @@
+upm/Samples~/**/*/Library
+upm/Samples~/**/*/Gen
+upm/Samples~/**/*/Logs
+upm/Samples~/**/*/ProjectSettings
+upm/Samples~/**/*/Temp
+upm/Samples~/**/*/UserSettings
+upm/Samples~/**/*.vsconfig
+upm/Samples~/**/*.sln
+upm/Samples~/**/*.csproj
+node_modules
+.vscode
+.DS_Store
+.idea
+**/*/package-lock.json
+ts-monorepo-test
+puerts

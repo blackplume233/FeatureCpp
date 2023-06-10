@@ -1,6 +1,46 @@
 [
 {
-  "directory": "/Users/muyuli/Workspace/FeatureLearn/FeatureCPP",
-  "arguments": ["/usr/bin/xcrun -sdk macosx clang", "-c", "-Qunused-arguments", "-target", "x86_64-apple-macos13.1", "-isysroot", "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk", "-Iinclude", "-std=c++20", "-fmodules", "-fbuiltin-module-map", "-fimplicit-modules", "-fmodule-file=build/.gens/FeatureCPP/macosx/x86_64/release/rules/modules/cache/NaLog.pcm", "-o", "build/.objs/FeatureCPP/macosx/x86_64/release/src/main.cpp.o", "src/main.cpp"],
-  "file": "src/main.cpp"
+  "directory": "F:\\workspace\\FeatureCpp\\FeatureCPP",
+  "arguments": ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/std:c++20", "/I3rd\\imgui", "/I3rd\\imgui\\backends", "/IC:\\VulkanSDK\\1.3.243.0\\include", "/IC:\\VulkanSDK\\1.3.243.0\\Include\\SDL2", "/D_DEBUG", "/EHsc", "/c", "/Fobuild\\.objs\\FeatureCPP\\windows\\x64\\release\\src\\main.cpp.obj", "src\\main.cpp"],
+  "file": "src\\main.cpp"
+},
+{
+  "directory": "F:\\workspace\\FeatureCpp\\FeatureCPP",
+  "arguments": ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/std:c++20", "/I3rd\\imgui", "/I3rd\\imgui\\backends", "/IC:\\VulkanSDK\\1.3.243.0\\include", "/IC:\\VulkanSDK\\1.3.243.0\\Include\\SDL2", "/D_DEBUG", "/EHsc", "/c", "/Fobuild\\.objs\\FeatureCPP\\windows\\x64\\release\\src\\RenderWindows.cpp.obj", "src\\RenderWindows.cpp"],
+  "file": "src\\RenderWindows.cpp"
+},
+{
+  "directory": "F:\\workspace\\FeatureCpp\\FeatureCPP",
+  "arguments": ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/std:c++20", "/I3rd\\imgui", "/I3rd\\imgui\\backends", "/IC:\\VulkanSDK\\1.3.243.0\\include", "/IC:\\VulkanSDK\\1.3.243.0\\Include\\SDL2", "/D_DEBUG", "/EHsc", "/c", "/Fobuild\\.objs\\FeatureCPP\\windows\\x64\\release\\3rd\\imgui\\backends\\imgui_impl_sdl2.cpp.obj", "3rd\\imgui\\backends\\imgui_impl_sdl2.cpp"],
+  "file": "3rd\\imgui\\backends\\imgui_impl_sdl2.cpp"
+},
+{
+  "directory": "F:\\workspace\\FeatureCpp\\FeatureCPP",
+  "arguments": ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/std:c++20", "/I3rd\\imgui", "/I3rd\\imgui\\backends", "/IC:\\VulkanSDK\\1.3.243.0\\include", "/IC:\\VulkanSDK\\1.3.243.0\\Include\\SDL2", "/D_DEBUG", "/EHsc", "/c", "/Fobuild\\.objs\\FeatureCPP\\windows\\x64\\release\\3rd\\imgui\\backends\\imgui_impl_vulkan.cpp.obj", "3rd\\imgui\\backends\\imgui_impl_vulkan.cpp"],
+  "file": "3rd\\imgui\\backends\\imgui_impl_vulkan.cpp"
+},
+{
+  "directory": "F:\\workspace\\FeatureCpp\\FeatureCPP",
+  "arguments": ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/std:c++20", "/I3rd\\imgui", "/I3rd\\imgui\\backends", "/IC:\\VulkanSDK\\1.3.243.0\\include", "/IC:\\VulkanSDK\\1.3.243.0\\Include\\SDL2", "/D_DEBUG", "/EHsc", "/c", "/Fobuild\\.objs\\FeatureCPP\\windows\\x64\\release\\3rd\\imgui\\imgui.cpp.obj", "3rd\\imgui\\imgui.cpp"],
+  "file": "3rd\\imgui\\imgui.cpp"
+},
+{
+  "directory": "F:\\workspace\\FeatureCpp\\FeatureCPP",
+  "arguments": ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/std:c++20", "/I3rd\\imgui", "/I3rd\\imgui\\backends", "/IC:\\VulkanSDK\\1.3.243.0\\include", "/IC:\\VulkanSDK\\1.3.243.0\\Include\\SDL2", "/D_DEBUG", "/EHsc", "/c", "/Fobuild\\.objs\\FeatureCPP\\windows\\x64\\release\\3rd\\imgui\\imgui_demo.cpp.obj", "3rd\\imgui\\imgui_demo.cpp"],
+  "file": "3rd\\imgui\\imgui_demo.cpp"
+},
+{
+  "directory": "F:\\workspace\\FeatureCpp\\FeatureCPP",
+  "arguments": ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/std:c++20", "/I3rd\\imgui", "/I3rd\\imgui\\backends", "/IC:\\VulkanSDK\\1.3.243.0\\include", "/IC:\\VulkanSDK\\1.3.243.0\\Include\\SDL2", "/D_DEBUG", "/EHsc", "/c", "/Fobuild\\.objs\\FeatureCPP\\windows\\x64\\release\\3rd\\imgui\\imgui_draw.cpp.obj", "3rd\\imgui\\imgui_draw.cpp"],
+  "file": "3rd\\imgui\\imgui_draw.cpp"
+},
+{
+  "directory": "F:\\workspace\\FeatureCpp\\FeatureCPP",
+  "arguments": ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/std:c++20", "/I3rd\\imgui", "/I3rd\\imgui\\backends", "/IC:\\VulkanSDK\\1.3.243.0\\include", "/IC:\\VulkanSDK\\1.3.243.0\\Include\\SDL2", "/D_DEBUG", "/EHsc", "/c", "/Fobuild\\.objs\\FeatureCPP\\windows\\x64\\release\\3rd\\imgui\\imgui_tables.cpp.obj", "3rd\\imgui\\imgui_tables.cpp"],
+  "file": "3rd\\imgui\\imgui_tables.cpp"
+},
+{
+  "directory": "F:\\workspace\\FeatureCpp\\FeatureCPP",
+  "arguments": ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/std:c++20", "/I3rd\\imgui", "/I3rd\\imgui\\backends", "/IC:\\VulkanSDK\\1.3.243.0\\include", "/IC:\\VulkanSDK\\1.3.243.0\\Include\\SDL2", "/D_DEBUG", "/EHsc", "/c", "/Fobuild\\.objs\\FeatureCPP\\windows\\x64\\release\\3rd\\imgui\\imgui_widgets.cpp.obj", "3rd\\imgui\\imgui_widgets.cpp"],
+  "file": "3rd\\imgui\\imgui_widgets.cpp"
 }]

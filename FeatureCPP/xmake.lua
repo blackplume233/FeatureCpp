@@ -5,14 +5,31 @@ local is_win = is_plat("windows")
 target("FeatureCPP")
     set_kind("binary")
     set_languages("cxx20")
-    add_cxxflags("-std=c++20")
-    add_cxxflags("-fmodules-ts")
-    add_files("src/*.cpp")
-    add_files("src/**/*.cpp")
-    add_files("module/*.ixx")
-    add_files("module/**/*.ixx")
-    add_includedirs("include")
-    set_toolset("cxx", "clang")
+    add_cxxflags("/c")
+    add_files("src/**.cpp")
+    --add_files("module/**.ixx")
+    add_defines("_DEBUG")
+
+
+    --IMGUI
+    add_includedirs("3rd/imgui")
+    add_includedirs("3rd/imgui/backends")
+    add_files("3rd/imgui/**.cpp")
+
+    if (is_win) then
+        add_includedirs("$(env VULKAN_SDK)/include")
+        add_includedirs("$(env SDL2_DIR)")
+    end
+    add_linkdirs("$(env VULKAN_SDK)/Lib")
+    add_links("vulkan-1","SDL2", "SDL2main", "libcpmtd")
+
+
+    if (is_mac) then
+        add_cxxflags("-std=c++20")
+        add_cxxflags("-fmodules-ts")
+        set_toolset("cxx", "clang")
+    end
+
     
 
 --

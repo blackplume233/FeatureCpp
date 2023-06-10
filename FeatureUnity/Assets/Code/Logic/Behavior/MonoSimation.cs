@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Code.Logic.Tools;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -13,7 +12,7 @@ public class MonoSimation : MonoBehaviour
 {
     public GameObject Target;
     public ParabolaFunctor Config;
-    
+
     public bool AutoFindSpeed = true;
     public float Angle;
     public float Speed;
@@ -33,7 +32,7 @@ public class MonoSimation : MonoBehaviour
     {
     }
 
-    
+
     private void OnDrawGizmos()
     {
         const float lineLength = 50;
@@ -106,6 +105,5 @@ public class MonoSimation : MonoBehaviour
 
     #region Utils
 
-   
     #endregion
 }

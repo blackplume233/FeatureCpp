@@ -7,3 +7,6 @@ FeatureUnity/.vs/FeatureUnity/xs/project-cache/Unity.RenderPipelines.Universal.R
 FeatureUnity/Logs
 FeatureUnity/Temp
 
+FeatureCPP/.cache
+FeatureCPP/.idea
+FeatureCPP/.vscode

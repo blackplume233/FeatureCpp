@@ -17,7 +17,7 @@ namespace Code.Editor.Inspector
             var disVec = (targetPos - selfPos);
             disVec.y = 0;
             var offsetPanel = disVec.magnitude;
-            if (GUILayout.Button("Find Speed") )
+            if (GUILayout.Button("Find Speed"))
             {
                 //var bestSpeed = monoSimation.CalBestSpeed(proxy,offsetPanel,offsetH);
                 var ret = monoSimation.Config.FindExceptAngle(offsetPanel, offsetH);

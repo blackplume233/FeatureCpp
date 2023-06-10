@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Code.Logic.Adapter;
-using Unity.VisualScripting;
 
 namespace Code.Logic.Tools
 {
@@ -17,6 +16,7 @@ namespace Code.Logic.Tools
             Level3,
             Immediate,
         }
+
         public enum ExpressionTokenType
         {
             FixedValue,
@@ -26,26 +26,23 @@ namespace Code.Logic.Tools
             Operator,
             TwoOperator
         }
-        
+
         public SubString TokenStr;
         public ExpressionTokenType TokenType;
         public IExpressionVal BoundVal = null;
-        
+
         //Prepare for future use
-        public PriorityType  Priority;
-        public int  RightParamCount;
+        public PriorityType Priority;
+        public int RightParamCount;
         public int LeftParamCount;
 
         public bool IsReady
         {
-            get
-            {
-                return BoundVal != null;
-            }
+            get { return BoundVal != null; }
         }
 
         public ExpressionParserFunctionDefine ParserFunctionDefine;
-        
+
         private ExpressionToken(SubString tokenStr, ExpressionTokenType tokenType)
         {
             TokenStr = tokenStr;
@@ -57,22 +54,25 @@ namespace Code.Logic.Tools
             return new ExpressionToken(tokenStr, tokenType);
         }
     }
+
     public class TokenStack<T>
     {
         protected List<T> _list;
         protected int stackBottom;
         public int Count => _list.Count - stackBottom;
+
         public void Push(T item)
         {
             _list.Add(item);
         }
-        
+
         public T Pop()
         {
             if (Count == 0)
             {
                 throw new Exception("Stack is empty");
             }
+
             var ret = _list[_list.Count - 1];
             _list.RemoveAt(_list.Count - 1);
             return ret;
@@ -84,6 +84,7 @@ namespace Code.Logic.Tools
             {
                 throw new Exception("Stack is empty");
             }
+
             return _list[_list.Count - 1];
         }
 
@@ -95,21 +96,23 @@ namespace Code.Logic.Tools
                 {
                     throw new IndexOutOfRangeException();
                 }
+
                 index = stackBottom + index;
                 return _list[index];
             }
         }
-        
-        public  TokenStack(TokenStack<T> parent)
+
+        public TokenStack(TokenStack<T> parent)
         {
             _list = parent._list;
             stackBottom = _list.Count;
         }
-        public  TokenStack() : this(0)
+
+        public TokenStack() : this(0)
         {
-            
         }
-        public  TokenStack(int capacity)
+
+        public TokenStack(int capacity)
         {
             _list = new List<T>(capacity);
             stackBottom = 0;
@@ -123,6 +126,7 @@ namespace Code.Logic.Tools
         public int RightParamCount;
         public ExpressionToken.PriorityType Priority;
         public Func<List<ExpressionToken>, IExpressionVal> Function;
+
         public virtual void PrepareToken(ExpressionToken token)
         {
             token.TokenType = ExpressionToken.ExpressionTokenType.Func;
@@ -137,24 +141,25 @@ namespace Code.Logic.Tools
             token.BoundVal = Function?.Invoke(tokens);
         }
     }
+
     public class ExpressionParser
     {
         public string IdentifierChars = "abcdefghijklmnopqrstuvwxyz§$" + "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         public string NumberChars = "0123456789.";
         public string OperatorChars = "+-*/%&|!";
-        
+
         //private Stack<ExpressionToken> TokenStacks = new Stack<ExpressionToken>();
         private Dictionary<string, ExpressionParserFunctionDefine> _functionDefineDict = new Dictionary<string, ExpressionParserFunctionDefine>()
         {
-            
         };
+
         public IExpressionVal Parse(string expression)
         {
             expression = expression.Trim();
             TokenStack<ExpressionToken> tokenStacks = new TokenStack<ExpressionToken>();
             ParseInternal(new SubString(expression, 0, expression.Length), tokenStacks);
             //return tokenStacks[0].;
-            for(int i=0; i<tokenStacks.Count; i++)
+            for (int i = 0; i < tokenStacks.Count; i++)
             {
                 SuperDebug.Log($"{tokenStacks[i].TokenStr.DebugStr} {tokenStacks[i].BoundVal}, {tokenStacks[0].BoundVal.Execute(null)}");
             }
@@ -162,11 +167,11 @@ namespace Code.Logic.Tools
             tokenStacks[0].BoundVal.Execute(null);
             return new BracketExpressionVal();
         }
-        
-        void ParseInternal(SubString expression,TokenStack<ExpressionToken> tokenStacks)
+
+        void ParseInternal(SubString expression, TokenStack<ExpressionToken> tokenStacks)
         {
             int curIdx = 0;
-            while (curIdx < expression.Length) 
+            while (curIdx < expression.Length)
             {
                 //TODO::处理括号的逻辑
                 if (expression[curIdx] == '(')
@@ -176,30 +181,31 @@ namespace Code.Logic.Tools
                     {
                         throw new Exception("Expression is invalid, no closing bracket");
                     }
+
                     var subExpression = expression.Sub(curIdx + 1, close - curIdx - 1);
                     var subTokenStacks = new TokenStack<ExpressionToken>(tokenStacks);
                     ParseInternal(subExpression, subTokenStacks);
                     curIdx = close + 1;
                     continue;
                 }
-                
+
                 curIdx += ParseToken(tokenStacks, expression.Sub(curIdx, expression.Length - curIdx));
             }
 
-            for( int i = tokenStacks.Count -1 ; i>=0 ; i--)
+            for (int i = tokenStacks.Count - 1; i >= 0; i--)
             {
                 PrepareResolveToken(tokenStacks[i]);
             }
-            
+
             //ResloveToken
             Stack<ExpressionToken> tokenCache = new Stack<ExpressionToken>(tokenStacks.Count);
             ExpressionToken.PriorityType priorityType = ExpressionToken.PriorityType.Level3;
             List<ExpressionToken> tokenParams = new List<ExpressionToken>();
             while (priorityType > ExpressionToken.PriorityType.Never)
             {
-                while(tokenStacks.Count > 0)
+                while (tokenStacks.Count > 0)
                 {
-                    tokenCache.Push(tokenStacks.Pop()) ;
+                    tokenCache.Push(tokenStacks.Pop());
                 }
 
                 while (tokenCache.Count > 0)
@@ -210,33 +216,39 @@ namespace Code.Logic.Tools
                         tokenStacks.Push(token);
                         continue;
                     }
+
                     var leftParamCount = token.LeftParamCount;
                     var rightParamCount = token.RightParamCount;
                     if (tokenCache.Count < rightParamCount || tokenStacks.Count < leftParamCount)
                     {
                         throw new Exception($"Expression is invalid Param Count is not enough {token.TokenStr.ToString()}");
-                    };
+                    }
+
+                    ;
                     //准备ResloveToken的参数
                     tokenParams.Clear();
-                    for(int i=0; i < leftParamCount ;i++)
+                    for (int i = 0; i < leftParamCount; i++)
                     {
                         tokenParams.Add(tokenStacks.Pop());
                     }
-                    for(int i =0; i< rightParamCount; i++)
+
+                    for (int i = 0; i < rightParamCount; i++)
                     {
                         tokenParams.Add(tokenCache.Pop());
                     }
+
                     ResloveToken(token, tokenParams);
                     tokenStacks.Push(token);
                 }
+
                 priorityType--;
             }
-            
-            
-            return ;
+
+
+            return;
         }
 
-        int  ParseToken(TokenStack<ExpressionToken> tokenStacks, SubString expression)
+        int ParseToken(TokenStack<ExpressionToken> tokenStacks, SubString expression)
         {
             if (expression.Length == 0)
             {
@@ -261,7 +273,7 @@ namespace Code.Logic.Tools
             {
                 return 1;
             }
-            else if(OperatorChars.Contains(expression[0]))
+            else if (OperatorChars.Contains(expression[0]))
             {
                 tokenStacks.Push(ExpressionToken.CreateToken(expression.Sub(0, 1), ExpressionToken.ExpressionTokenType.Operator));
                 return 1;
@@ -279,6 +291,7 @@ namespace Code.Logic.Tools
                     tokenStacks.Push(ExpressionToken.CreateToken(expression.Sub(0, 2), ExpressionToken.ExpressionTokenType.TwoOperator));
                     return 2;
                 }
+
                 tokenStacks.Push(ExpressionToken.CreateToken(expression.Sub(0, 1), ExpressionToken.ExpressionTokenType.Operator));
                 return 1;
             }
@@ -306,13 +319,15 @@ namespace Code.Logic.Tools
                         break;
                     }
                 }
+
                 tokenStacks.Push(ExpressionToken.CreateToken(expression.Sub(0, i), ExpressionToken.ExpressionTokenType.Identifier));
                 return i;
             }
             else
             {
-                throw new  Exception("Unknow token");
+                throw new Exception("Unknow token");
             }
+
             return 0;
         }
 
@@ -322,18 +337,19 @@ namespace Code.Logic.Tools
             {
                 return;
             }
+
             if (token.TokenType == ExpressionToken.ExpressionTokenType.FixedValue)
             {
                 token.Priority = ExpressionToken.PriorityType.Never;
                 token.LeftParamCount = 0;
                 token.RightParamCount = 0;
-                
+
                 var valStr = token.TokenStr.ToString();
                 if (int.TryParse(valStr, out var intVal))
                 {
                     token.BoundVal = new FixedExpressionVal(intVal);
                 }
-                else if(float.TryParse(valStr, out var floatVal))
+                else if (float.TryParse(valStr, out var floatVal))
                 {
                     token.BoundVal = new FixedExpressionVal(floatVal);
                 }
@@ -345,7 +361,7 @@ namespace Code.Logic.Tools
                 token.RightParamCount = 1;
 
                 var opStr = token.TokenStr[0];
-                switch(opStr)
+                switch (opStr)
                 {
                     case '>':
                         token.Priority = ExpressionToken.PriorityType.Level1;
@@ -382,7 +398,6 @@ namespace Code.Logic.Tools
                         token.Priority = ExpressionToken.PriorityType.Level3;
                         break;
                 }
-                
             }
 
             if (token.TokenType == ExpressionToken.ExpressionTokenType.TwoOperator)
@@ -403,9 +418,10 @@ namespace Code.Logic.Tools
                         break;
                 }
             }
+
             if (token.TokenType == ExpressionToken.ExpressionTokenType.Identifier)
             {
-                if(_functionDefineDict.TryGetValue(token.TokenStr.ToString(), out var funcDefine))
+                if (_functionDefineDict.TryGetValue(token.TokenStr.ToString(), out var funcDefine))
                 {
                     funcDefine.PrepareToken(token);
                 }
@@ -415,7 +431,7 @@ namespace Code.Logic.Tools
                 }
             }
         }
-        
+
         void PrepareVariableToken(ExpressionToken token)
         {
             token.Priority = ExpressionToken.PriorityType.Never;
@@ -437,7 +453,7 @@ namespace Code.Logic.Tools
             }
             else
             {
-                token.ParserFunctionDefine.ResolveToken(token,param);
+                token.ParserFunctionDefine.ResolveToken(token, param);
             }
         }
 
@@ -452,10 +468,11 @@ namespace Code.Logic.Tools
                     token.BoundVal = new CompareExpressionVal(leftVal, rightVal, CompareExpressionVal.CompareType.GreaterEqual);
                     return;
                 case '<':
-                    token.BoundVal = new CompareExpressionVal(leftVal,rightVal, CompareExpressionVal.CompareType.LessEqual);
+                    token.BoundVal = new CompareExpressionVal(leftVal, rightVal, CompareExpressionVal.CompareType.LessEqual);
                     return;
             }
         }
+
         void ResloveOpToken(ExpressionToken token, List<ExpressionToken> param)
         {
             var opStr = token.TokenStr[0];
@@ -466,8 +483,8 @@ namespace Code.Logic.Tools
                     token.BoundVal = new ConditionExpression(leftVal, true);
                     return;
             }
-            
-            
+
+
             var rightVal = param[1].BoundVal;
             switch (opStr)
             {
@@ -486,7 +503,7 @@ namespace Code.Logic.Tools
                 case '%':
                     token.BoundVal = new MathExpressionVal(MathExpressionVal.MathOpType.Mod, leftVal, rightVal);
                     return;
-                
+
                 //& 和 | 的语义有待商榷
                 case '&':
                     token.BoundVal = new AndExpressionVal(leftVal, rightVal);
@@ -494,12 +511,12 @@ namespace Code.Logic.Tools
                 case '|':
                     token.BoundVal = new OrExpressionVal(leftVal, rightVal);
                     return;
-                
+
                 case '>':
                     token.BoundVal = new CompareExpressionVal(leftVal, rightVal, CompareExpressionVal.CompareType.Greater);
                     return;
                 case '<':
-                    token.BoundVal = new CompareExpressionVal(leftVal,rightVal, CompareExpressionVal.CompareType.Less);
+                    token.BoundVal = new CompareExpressionVal(leftVal, rightVal, CompareExpressionVal.CompareType.Less);
                     return;
                 case '=':
                     token.BoundVal = new CompareExpressionVal(leftVal, rightVal, CompareExpressionVal.CompareType.Equal);
@@ -509,6 +526,7 @@ namespace Code.Logic.Tools
 
 
         #region Bracket
+
         int FindClosingBracket(SubString aText, int aStart, char aOpen, char aClose)
         {
             int counter = 0;
@@ -521,9 +539,9 @@ namespace Code.Logic.Tools
                 if (counter == 0)
                     return i;
             }
+
             return -1;
         }
-        
 
         #endregion
     }

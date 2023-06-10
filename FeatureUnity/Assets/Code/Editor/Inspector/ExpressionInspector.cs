@@ -7,10 +7,11 @@ using UnityEditor;
 using UnityEngine;
 
 [CustomEditor(typeof(ExpressionBehavior))]
-public class ExpressionInspector  : Editor
+public class ExpressionInspector : Editor
 {
     private ExpressionParser _parser = new ExpressionParser();
     private ExpressionBehavior _target;
+
     private void OnEnable()
     {
         _target = target as ExpressionBehavior;
@@ -32,4 +33,3 @@ public class ExpressionInspector  : Editor
         }
     }
 }
-
