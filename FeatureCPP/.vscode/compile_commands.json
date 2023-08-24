@@ -1,6 +1,0 @@
-[
-{
-  "directory": "/Users/muyuli/Workspace/FeatureLearn/FeatureCPP",
-  "arguments": ["clang", "-c", "-Qunused-arguments", "-Iinclude", "-std=c++20", "-fmodules-ts", "-fmodules", "-fbuiltin-module-map", "-fimplicit-modules", "-fmodule-file=build/.gens/FeatureCPP/linux/arm64/release/rules/modules/cache/Nalog.pcm", "-o", "build/.objs/FeatureCPP/linux/arm64/release/src/main.cpp.o", "src/main.cpp"],
-  "file": "src/main.cpp"
-}]
