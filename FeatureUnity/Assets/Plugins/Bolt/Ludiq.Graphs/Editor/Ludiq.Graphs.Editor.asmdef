@@ -1,0 +1,14 @@
+{
+    "name": "Ludiq.Graphs.Editor",
+    "references": [
+        "Ludiq.Graphs.Runtime",
+        "Ludiq.Core.Runtime",
+        "Ludiq.Core.Editor"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}

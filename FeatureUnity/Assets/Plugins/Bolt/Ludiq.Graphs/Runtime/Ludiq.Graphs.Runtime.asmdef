@@ -1,0 +1,10 @@
+{
+    "name": "Ludiq.Graphs.Runtime",
+    "references": [
+        "Ludiq.Core.Runtime"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}

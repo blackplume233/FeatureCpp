@@ -1,0 +1,11 @@
+{
+    "name": "Bolt.Core.Runtime",
+    "references": [
+        "Ludiq.Core.Runtime",
+        "Ludiq.Graphs.Runtime"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}

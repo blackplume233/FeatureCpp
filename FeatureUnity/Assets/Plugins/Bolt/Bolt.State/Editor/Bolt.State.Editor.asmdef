@@ -1,0 +1,20 @@
+{
+    "name": "Bolt.State.Editor",
+    "references": [
+        "Ludiq.Core.Runtime",
+        "Ludiq.Graphs.Runtime",
+        "Bolt.Core.Runtime",
+        "Bolt.Flow.Runtime",
+        "Bolt.State.Runtime",
+        "Ludiq.Core.Editor",
+        "Ludiq.Graphs.Editor",
+        "Bolt.Core.Editor",
+        "Bolt.Flow.Editor"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}

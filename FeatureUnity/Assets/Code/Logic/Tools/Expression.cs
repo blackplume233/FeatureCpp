@@ -10,17 +10,17 @@ namespace Code.Logic.Tools
         // public string GetParamString(string name);
         // public int GetParamInt(string name);
         // public bool GetParamBool(string name);
-        TableUnionValue GetParam(string name);
+         TableUnionValue GetParam(string name);
     }
-
-
+    
+    
     public interface IExpressionVal
     {
         UnionValueType GetRetType();
         TableUnionValue Execute(IParamContext paramContext);
         bool Vaildity();
     }
-
+    
     public enum ExpressionValType
     {
         Float = UnionValueType.Float,
@@ -29,13 +29,12 @@ namespace Code.Logic.Tools
         Bool = UnionValueType.Float,
         InVaild = UnionValueType.Null
     }
-
+    
     [Serializable]
     public class FixedExpressionVal : IExpressionVal
     {
         public TableUnionValue Value { get; }
-
-        public FixedExpressionVal(TableUnionValue value)
+        public FixedExpressionVal( TableUnionValue value)
         {
             Value = value;
         }
@@ -44,7 +43,7 @@ namespace Code.Logic.Tools
         {
             return Value.UnionValueType;
         }
-
+        
         public TableUnionValue Execute(IParamContext paramContext)
         {
             return Value;
@@ -55,14 +54,12 @@ namespace Code.Logic.Tools
             return true;
         }
     }
-
     [Serializable]
-    public class RefExpressionValue : IExpressionVal
+    public class RefExpressionValue :IExpressionVal
     {
         public UnionValueType Type { get; }
         public string RefName;
         public ExpressionValType ExpressionRetValType;
-
         public RefExpressionValue(string refName, ExpressionValType type)
         {
             RefName = refName;
@@ -84,7 +81,7 @@ namespace Code.Logic.Tools
             return true;
         }
     }
-
+    
     [Serializable]
     public abstract class BinaryExpressionVal : IExpressionVal
     {
@@ -106,12 +103,11 @@ namespace Code.Logic.Tools
         public IExpressionVal Left;
         public IExpressionVal Right;
     }
-
+    
     [Serializable]
     public class BracketExpressionVal : IExpressionVal
     {
         public ExpressionValType expressionRetValType;
-
         public UnionValueType GetRetType()
         {
             return (UnionValueType)expressionRetValType;
@@ -128,7 +124,7 @@ namespace Code.Logic.Tools
             {
                 return false;
             }
-
+            
             foreach (var expressionVal in ExpressionVal)
             {
                 if (!expressionVal.Vaildity())
@@ -145,9 +141,10 @@ namespace Code.Logic.Tools
             return true;
         }
 
-        [SerializeField] public IExpressionVal[] ExpressionVal = null;
+        [SerializeField]
+        public IExpressionVal[] ExpressionVal = null;
     }
-
+    
     [Serializable]
     public class CompareExpressionVal : BinaryExpressionVal
     {
@@ -160,9 +157,7 @@ namespace Code.Logic.Tools
             GreaterEqual,
             LessEqual
         }
-
         public CompareType compareType;
-
         public CompareExpressionVal(IExpressionVal left, IExpressionVal right, CompareType type)
         {
             Left = left;
@@ -216,7 +211,7 @@ namespace Code.Logic.Tools
 
             return false;
         }
-
+        
         public bool CompareString(IParamContext paramContext)
         {
             var left = Left.Execute(paramContext).CheckedString();
@@ -231,7 +226,7 @@ namespace Code.Logic.Tools
 
             return false;
         }
-
+        
         public bool CompareBool(IParamContext paramContext)
         {
             var left = Left.Execute(paramContext).CheckedBool();
@@ -246,7 +241,7 @@ namespace Code.Logic.Tools
 
             return false;
         }
-
+        
         public bool CompareFloat(IParamContext paramContext)
         {
             const float tolerance = 0.00001f;
@@ -278,7 +273,6 @@ namespace Code.Logic.Tools
     {
         public IExpressionVal Condition;
         public bool isNot;
-
         public ConditionExpression(IExpressionVal condition, bool isNot = false)
         {
             Condition = condition;
@@ -305,7 +299,6 @@ namespace Code.Logic.Tools
             return Condition != null && Condition.Vaildity() && Condition.GetRetType() == UnionValueType.Bool;
         }
     }
-
     [Serializable]
     public class OrExpressionVal : BinaryExpressionVal
     {
@@ -327,7 +320,7 @@ namespace Code.Logic.Tools
             return left && right;
         }
     }
-
+    
     [Serializable]
     public class AndExpressionVal : BinaryExpressionVal
     {
@@ -361,9 +354,7 @@ namespace Code.Logic.Tools
             Div,
             Mod
         }
-
         public MathOpType mathOpType;
-
         public MathExpressionVal(MathOpType type, IExpressionVal left, IExpressionVal right)
         {
             mathOpType = type;

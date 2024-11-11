@@ -10,3 +10,5 @@ FeatureUnity/Temp
 FeatureCPP/.cache
 FeatureCPP/.idea
 FeatureCPP/.vscode
+FeatureCppStd/.idea
+FeatureCppStd/cmake-build-debug
