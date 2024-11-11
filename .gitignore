@@ -7,3 +7,5 @@ FeatureUnity/.vs/FeatureUnity/xs/project-cache/Unity.RenderPipelines.Universal.R
 FeatureUnity/Logs
 FeatureUnity/Temp
 
+FeatureCppStd/.idea
+FeatureCppStd/cmake-build-debug

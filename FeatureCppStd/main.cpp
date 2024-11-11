@@ -1,5 +1,7 @@
 #include <iostream>
 
+#include "UnitTest/ReturnTest.h"
+
 class Data{
 public:
     int value = 2;
@@ -11,7 +13,9 @@ public:
 };
 
 int main() {
-
+    ReturnTest test;
+    std::cout << test.GetTemp();
+    std::cout << "Finish";
 }
 
 
@@ -24,4 +28,5 @@ int TestModule()
     // Context.GetObj<Data2>()->value = 10;
     // std::cout << Context.GetObj<Data2>()->value << std::endl;
     // return 0;
+    return 0;
 }

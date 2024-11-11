@@ -1,0 +1,16 @@
+{
+    "name": "Bolt.Core.Editor",
+    "references": [
+        "Bolt.Core.Runtime",
+        "Ludiq.Core.Runtime",
+        "Ludiq.Graphs.Runtime",
+        "Ludiq.Graphs.Editor",
+        "Ludiq.Core.Editor"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}

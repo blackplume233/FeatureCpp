@@ -4,7 +4,6 @@ namespace Code.Logic.Adapter
 	{
 		void Test()
 		{
-			using ObjectHandle<object> handle = new ObjectHandle<object>();
 			
 		}
 	}

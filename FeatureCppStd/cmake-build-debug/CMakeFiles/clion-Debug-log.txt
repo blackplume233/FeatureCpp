@@ -1,8 +1,0 @@
-"C:\Program Files\JetBrains\CLion 2023.1\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2023.1/bin/ninja/win/x64/ninja.exe" -G Ninja -S F:\workspace\FeatureCpp\FeatureCppStd -B F:\workspace\FeatureCpp\FeatureCppStd\cmake-build-debug
-CMake Error at CMakeLists.txt:6 (add_module):
-  Unknown CMake command "add_module".
-
-
--- Configuring incomplete, errors occurred!
-See also "F:/workspace/FeatureCpp/FeatureCppStd/cmake-build-debug/CMakeFiles/CMakeOutput.log".
-See also "F:/workspace/FeatureCpp/FeatureCppStd/cmake-build-debug/CMakeFiles/CMakeError.log".

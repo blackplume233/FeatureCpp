@@ -183,9 +183,9 @@ namespace Code.Logic.Feature
 
                     // Snap the span to the heightfield height grid.
                     int maxLayerCandidate = (int)Math.Ceiling(smax * buildContext.cellHeightInverse);
-                    short minLayer = (short)Math.Clamp((int)Math.Floor(smin * buildContext.cellHeightInverse), 0,
+                    short minLayer = (short)Mathf.Clamp((int)Math.Floor(smin * buildContext.cellHeightInverse), 0,
                         VoxelBattleMapMeta.MaxHeight - 1);
-                    short maxLayer = (short)Math.Clamp(maxLayerCandidate, (int)minLayer + 1,
+                    short maxLayer = (short)Mathf.Clamp(maxLayerCandidate, (int)minLayer + 1,
                         VoxelBattleMapMeta.MaxHeight);
 
                     var spanData = new SpanData();

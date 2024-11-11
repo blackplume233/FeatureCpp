@@ -10,7 +10,7 @@ namespace Code.Logic.Tools
         // public string GetParamString(string name);
         // public int GetParamInt(string name);
         // public bool GetParamBool(string name);
-        public TableUnionValue GetParam(string name);
+         TableUnionValue GetParam(string name);
     }
     
     
